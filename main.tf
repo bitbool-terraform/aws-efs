@@ -1,5 +1,5 @@
 resource "aws_security_group" "efs_nfs" {
-  name        = "allow nfs for efs"
+  name        = format("efs-%s",var.share_name)
   description = "Allow NFS inbound traffic"
   vpc_id      = var.vpc_id
   tags = var.tags
@@ -9,12 +9,12 @@ resource "aws_security_group" "efs_nfs" {
     from_port   = 2049
     to_port     = 2049
     protocol    = "tcp"
-    cidr_blocks = [var.vpc_cidr]
+    cidr_blocks = var.cidr_access_from
   }
 }
 
 resource "aws_efs_file_system" "aws_efs" {
-  creation_token = format("efs-%s-%s-%s",var.project,var.systemenv,var.share_name)
+  creation_token = var.share_name
   encrypted = true
 # throughput_mode = elastic
   tags = var.tags

@@ -1,11 +1,7 @@
-variable "project" {}
-variable "systemenv" {}
-
-
 variable "share_name" {}
 
 variable "vpc_id" {}
-variable "vpc_cidr" {}
+variable "cidr_access_from" {}
 variable "subnet_ids" {}
 
 
