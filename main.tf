@@ -17,7 +17,7 @@ resource "aws_efs_file_system" "aws_efs" {
   creation_token = var.share_name
   encrypted = true
 # throughput_mode = elastic
-  tags = var.tags
+  tags = merge({ "Name" = var.share_name}, var.tags)
 }
 
 
