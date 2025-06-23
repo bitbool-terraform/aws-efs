@@ -2,7 +2,7 @@ resource "aws_security_group" "efs_nfs" {
   name        = format("efs-%s",var.share_name)
   description = "Allow NFS inbound traffic"
   vpc_id      = var.vpc_id
-  tags = var.tags
+  tags = merge({"Name" = format("efs-%s",var.share_name) }, var.tags)
 
   ingress {
     description = "NFS from VPC"
@@ -44,5 +44,5 @@ resource "aws_efs_access_point" "efs_app" {
       permissions = var.permissions    
     }
   }
-  tags = var.tags
+  tags = merge({"Name" = format("efsap-%s",var.share_name) }, var.tags)
 }
